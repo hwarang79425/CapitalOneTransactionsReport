@@ -1,0 +1,40 @@
+// To compile before complile please check dir structure 
+javac -d bin -cp libs/* src/main/*.java src/util/*.java
+
+// Directory structures
+/{parent Director}
+///---->res
+	///---->config.properties
+///---->libs
+	///---->json-20160810.jar
+///---->src
+	///---->util
+		///----->projectTransactions.java
+		///----->Node.java
+		///----->GetData.java
+		///----->CreateWindow.java
+	///---->main
+		///----->MainCode.java
+
+// To run the application
+Linux : java -cp res:bin:libs/* main.MainCode
+Windows : java -cp bin;bin;libs/* main.MainCode
+
+NOTE
+After an user runs the application, the user will get window.
+If an user click just Submit button it will give full transactions report.
+If an user check Ignore Donuts Transactions check box, it will give transactions report without Donuts transactions.
+If an user check Ignore Credit Card Payment check box, it will give transactions report without Credit Card payment. But it will also give a transactions report with just credit card transactions
+If an user check both Ignore Donuts transaction and Ignore Credit Card Payment, it will give a transactions report with Donuts and Credit Card payments. But it will also give a transactions report with just credit card transactions.
+
+-----------------------------------------
+If an user check Build projected transactions, it will require to enter valid Year and Month. It validate the vaules.
+Once the user click Submit it will generate two transactions reports. one for all transactions and the other for projected transactions.
+For Projected transactions if date < current date, then it will use data from previously built report by Get All Transactions.
+If date >= current date, then it will use Projected URL to pull data and dispaly it. For date = current date, it will also check days(1-31).
+INFO - I couldn't fully understnad the task for crstal ball, so I made few assumptions. Since I had to complete this homework within 48-72 hours and recieved right before the weenkend, I couldn't clarify with user/tester.
+
+---------------------------------------
+Data Structure
+TreeMap to store years in sorted order and each eyar in TreeMap points to Node Array[2][12]. Array rows -> 0 for spent and 1 for income. Array column -> 0-11 for each month
+Node object stores data for each transaction
